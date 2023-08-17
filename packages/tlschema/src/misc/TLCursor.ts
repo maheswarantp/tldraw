@@ -27,6 +27,7 @@ export const TL_CURSOR_TYPES = new Set([
 	'senw-rotate',
 	'zoom-in',
 	'zoom-out',
+	'tool-colorpicker',
 ])
 
 /**
