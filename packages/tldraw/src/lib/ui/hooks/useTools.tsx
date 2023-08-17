@@ -61,6 +61,17 @@ export function ToolsProvider({ overrides, children }: TLUiToolsProviderProps) {
 				},
 			},
 			{
+				id: 'colorpicker',
+				label: 'tool.colorpicker',
+				icon: 'tool-colorpicker',
+				kbd: 'q',
+				readonlyOk: true,
+				onSelect(source) {
+					editor.setCurrentTool('colorpicker')
+					trackEvent('select-tool', { source, id: 'colorpicker' })
+				},
+			},
+			{
 				id: 'hand',
 				label: 'tool.hand',
 				icon: 'tool-hand',

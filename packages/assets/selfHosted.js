@@ -156,6 +156,7 @@ export function getAssetUrls(opts) {
 			'text-align-left': formatAssetUrl('./icons/icon/text-align-left.svg', opts),
 			'text-align-right': formatAssetUrl('./icons/icon/text-align-right.svg', opts),
 			'tool-arrow': formatAssetUrl('./icons/icon/tool-arrow.svg', opts),
+			'tool-colorpicker': formatAssetUrl('./icons/icon/tool-colorpicker.svg', opts),
 			'tool-embed': formatAssetUrl('./icons/icon/tool-embed.svg', opts),
 			'tool-eraser': formatAssetUrl('./icons/icon/tool-eraser.svg', opts),
 			'tool-frame': formatAssetUrl('./icons/icon/tool-frame.svg', opts),

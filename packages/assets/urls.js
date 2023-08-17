@@ -462,6 +462,10 @@ export function getAssetUrlsByMetaUrl(opts) {
 				new URL('./icons/icon/tool-arrow.svg', import.meta.url).href,
 				opts
 			),
+			'tool-colorpicker': formatAssetUrl(
+				new URL('./icons/icon/tool-colorpicker.svg', import.meta.url).href,
+				opts
+			),
 			'tool-embed': formatAssetUrl(
 				new URL('./icons/icon/tool-embed.svg', import.meta.url).href,
 				opts

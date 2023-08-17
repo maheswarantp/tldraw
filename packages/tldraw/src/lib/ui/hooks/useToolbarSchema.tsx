@@ -53,6 +53,7 @@ export function ToolbarSchemaProvider({ overrides, children }: TLUiToolbarSchema
 			toolbarItem(tools.text),
 			toolbarItem(tools.note),
 			toolbarItem(tools.asset),
+			toolbarItem(tools.colorpicker),
 			toolbarItem(tools['rectangle']),
 			toolbarItem(tools['ellipse']),
 			toolbarItem(tools['diamond']),

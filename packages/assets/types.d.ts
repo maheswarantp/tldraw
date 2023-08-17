@@ -146,6 +146,7 @@ export type AssetUrls = {
 		'text-align-left': string
 		'text-align-right': string
 		'tool-arrow': string
+		'tool-colorpicker': string
 		'tool-embed': string
 		'tool-eraser': string
 		'tool-frame': string
