@@ -30,6 +30,8 @@ import { STYLES } from './styles'
 
 interface StylePanelProps {
 	isMobile?: boolean
+	isColorPickerPopUp?: boolean
+	handlePopUpChange?: () => void
 }
 
 const selectToolStyles = [DefaultColorStyle, DefaultDashStyle, DefaultFillStyle, DefaultSizeStyle]
@@ -50,7 +52,7 @@ function getRelevantStyles(
 }
 
 /** @internal */
-export const StylePanel = function StylePanel({ isMobile }: StylePanelProps) {
+export const StylePanel = function StylePanel({ isMobile, handlePopUpChange }: StylePanelProps) {
 	const editor = useEditor()
 
 	const relevantStyles = useValue('getRelevantStyles', () => getRelevantStyles(editor), [editor])
@@ -77,7 +79,11 @@ export const StylePanel = function StylePanel({ isMobile }: StylePanelProps) {
 
 	return (
 		<div className="tlui-style-panel" data-ismobile={isMobile} onPointerLeave={handlePointerOut}>
-			<CommonStylePickerSet styles={styles} opacity={opacity} />
+			<CommonStylePickerSet
+				styles={styles}
+				opacity={opacity}
+				handlePopUpChange={handlePopUpChange}
+			/>
 			{!hideText && <TextStylePickerSet styles={styles} />}
 			{!(hideGeo && hideArrowHeads && hideSpline) && (
 				<div className="tlui-style-panel__section" aria-label="style panel styles">
@@ -106,9 +112,11 @@ const tldrawSupportedOpacities = [0.1, 0.25, 0.5, 0.75, 1] as const
 function CommonStylePickerSet({
 	styles,
 	opacity,
+	handlePopUpChange,
 }: {
 	styles: ReadonlySharedStyleMap
 	opacity: SharedStyle<number>
+	handlePopUpChange?: () => void
 }) {
 	const editor = useEditor()
 	const msg = useTranslation()
@@ -123,6 +131,11 @@ function CommonStylePickerSet({
 		},
 		[editor]
 	)
+
+	const handlePopUpValueChange = () => {
+		// console.log('Clicked handlePopUpValueChange')
+		return handlePopUpChange?.()
+	}
 
 	const color = styles.get(DefaultColorStyle)
 	const fill = styles.get(DefaultFillStyle)
@@ -155,6 +168,8 @@ function CommonStylePickerSet({
 						items={STYLES.color}
 						value={color}
 						onValueChange={handleValueChange}
+						isCustomColor={true}
+						onPopUpValueChange={handlePopUpValueChange}
 					/>
 				)}
 				{opacity === undefined ? null : (

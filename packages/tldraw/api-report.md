@@ -146,8 +146,8 @@ export class ArrowShapeUtil extends ShapeUtil<TLArrowShape> {
     onTranslateStart: TLOnTranslateStartHandler<TLArrowShape>;
     // (undocumented)
     static props: {
-        labelColor: EnumStyleProp<"black" | "blue" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow">;
-        color: EnumStyleProp<"black" | "blue" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow">;
+        labelColor: EnumStyleProp<"black" | "blue" | "custom-color" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow">;
+        color: EnumStyleProp<"black" | "blue" | "custom-color" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow">;
         fill: EnumStyleProp<"none" | "pattern" | "semi" | "solid">;
         dash: EnumStyleProp<"dashed" | "dotted" | "draw" | "solid">;
         size: EnumStyleProp<"l" | "m" | "s" | "xl">;
@@ -311,7 +311,7 @@ export class DrawShapeUtil extends ShapeUtil<TLDrawShape> {
     onResize: TLOnResizeHandler<TLDrawShape>;
     // (undocumented)
     static props: {
-        color: EnumStyleProp<"black" | "blue" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow">;
+        color: EnumStyleProp<"black" | "blue" | "custom-color" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow">;
         fill: EnumStyleProp<"none" | "pattern" | "semi" | "solid">;
         dash: EnumStyleProp<"dashed" | "dotted" | "draw" | "solid">;
         size: EnumStyleProp<"l" | "m" | "s" | "xl">;
@@ -490,8 +490,8 @@ export class GeoShapeUtil extends BaseBoxShapeUtil<TLGeoShape> {
         props: {
             growY: number;
             geo: "arrow-down" | "arrow-left" | "arrow-right" | "arrow-up" | "check-box" | "cloud" | "diamond" | "ellipse" | "hexagon" | "octagon" | "oval" | "pentagon" | "rectangle" | "rhombus-2" | "rhombus" | "star" | "trapezoid" | "triangle" | "x-box";
-            labelColor: "black" | "blue" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow";
-            color: "black" | "blue" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow";
+            labelColor: "black" | "blue" | "custom-color" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow";
+            color: "black" | "blue" | "custom-color" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow";
             fill: "none" | "pattern" | "semi" | "solid";
             dash: "dashed" | "dotted" | "draw" | "solid";
             size: "l" | "m" | "s" | "xl";
@@ -520,8 +520,8 @@ export class GeoShapeUtil extends BaseBoxShapeUtil<TLGeoShape> {
         props: {
             growY: number;
             geo: "arrow-down" | "arrow-left" | "arrow-right" | "arrow-up" | "check-box" | "cloud" | "diamond" | "ellipse" | "hexagon" | "octagon" | "oval" | "pentagon" | "rectangle" | "rhombus-2" | "rhombus" | "star" | "trapezoid" | "triangle" | "x-box";
-            labelColor: "black" | "blue" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow";
-            color: "black" | "blue" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow";
+            labelColor: "black" | "blue" | "custom-color" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow";
+            color: "black" | "blue" | "custom-color" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow";
             fill: "none" | "pattern" | "semi" | "solid";
             dash: "dashed" | "dotted" | "draw" | "solid";
             size: "l" | "m" | "s" | "xl";
@@ -584,8 +584,8 @@ export class GeoShapeUtil extends BaseBoxShapeUtil<TLGeoShape> {
     // (undocumented)
     static props: {
         geo: EnumStyleProp<"arrow-down" | "arrow-left" | "arrow-right" | "arrow-up" | "check-box" | "cloud" | "diamond" | "ellipse" | "hexagon" | "octagon" | "oval" | "pentagon" | "rectangle" | "rhombus-2" | "rhombus" | "star" | "trapezoid" | "triangle" | "x-box">;
-        labelColor: EnumStyleProp<"black" | "blue" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow">;
-        color: EnumStyleProp<"black" | "blue" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow">;
+        labelColor: EnumStyleProp<"black" | "blue" | "custom-color" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow">;
+        color: EnumStyleProp<"black" | "blue" | "custom-color" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow">;
         fill: EnumStyleProp<"none" | "pattern" | "semi" | "solid">;
         dash: EnumStyleProp<"dashed" | "dotted" | "draw" | "solid">;
         size: EnumStyleProp<"l" | "m" | "s" | "xl">;
@@ -666,7 +666,7 @@ export class HighlightShapeUtil extends ShapeUtil<TLHighlightShape> {
     onResize: TLOnResizeHandler<TLHighlightShape>;
     // (undocumented)
     static props: {
-        color: EnumStyleProp<"black" | "blue" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow">;
+        color: EnumStyleProp<"black" | "blue" | "custom-color" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow">;
         size: EnumStyleProp<"l" | "m" | "s" | "xl">;
         segments: ArrayOfValidator<    {
         type: "free" | "straight";
@@ -790,7 +790,7 @@ export class LineShapeUtil extends ShapeUtil<TLLineShape> {
     onResize: TLOnResizeHandler<TLLineShape>;
     // (undocumented)
     static props: {
-        color: EnumStyleProp<"black" | "blue" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow">;
+        color: EnumStyleProp<"black" | "blue" | "custom-color" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow">;
         dash: EnumStyleProp<"dashed" | "dotted" | "draw" | "solid">;
         size: EnumStyleProp<"l" | "m" | "s" | "xl">;
         spline: EnumStyleProp<"cubic" | "line">;
@@ -849,7 +849,7 @@ export class NoteShapeUtil extends ShapeUtil<TLNoteShape> {
     onBeforeCreate: (next: TLNoteShape) => {
         props: {
             growY: number;
-            color: "black" | "blue" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow";
+            color: "black" | "blue" | "custom-color" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow";
             size: "l" | "m" | "s" | "xl";
             font: "draw" | "mono" | "sans" | "serif";
             align: "end-legacy" | "end" | "middle-legacy" | "middle" | "start-legacy" | "start";
@@ -873,7 +873,7 @@ export class NoteShapeUtil extends ShapeUtil<TLNoteShape> {
     onBeforeUpdate: (prev: TLNoteShape, next: TLNoteShape) => {
         props: {
             growY: number;
-            color: "black" | "blue" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow";
+            color: "black" | "blue" | "custom-color" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow";
             size: "l" | "m" | "s" | "xl";
             font: "draw" | "mono" | "sans" | "serif";
             align: "end-legacy" | "end" | "middle-legacy" | "middle" | "start-legacy" | "start";
@@ -897,7 +897,7 @@ export class NoteShapeUtil extends ShapeUtil<TLNoteShape> {
     onEditEnd: TLOnEditEndHandler<TLNoteShape>;
     // (undocumented)
     static props: {
-        color: EnumStyleProp<"black" | "blue" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow">;
+        color: EnumStyleProp<"black" | "blue" | "custom-color" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow">;
         size: EnumStyleProp<"l" | "m" | "s" | "xl">;
         font: EnumStyleProp<"draw" | "mono" | "sans" | "serif">;
         align: EnumStyleProp<"end-legacy" | "end" | "middle-legacy" | "middle" | "start-legacy" | "start">;
@@ -1007,7 +1007,7 @@ export class TextShapeUtil extends ShapeUtil<TLTextShape> {
         isLocked: boolean;
         opacity: number;
         props: {
-            color: "black" | "blue" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow";
+            color: "black" | "blue" | "custom-color" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow";
             size: "l" | "m" | "s" | "xl";
             font: "draw" | "mono" | "sans" | "serif";
             align: "end-legacy" | "end" | "middle-legacy" | "middle" | "start-legacy" | "start";
@@ -1026,7 +1026,7 @@ export class TextShapeUtil extends ShapeUtil<TLTextShape> {
         y: number;
         props: {
             w: number;
-            color: "black" | "blue" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow";
+            color: "black" | "blue" | "custom-color" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow";
             size: "l" | "m" | "s" | "xl";
             font: "draw" | "mono" | "sans" | "serif";
             align: "end-legacy" | "end" | "middle-legacy" | "middle" | "start-legacy" | "start";
@@ -1066,7 +1066,7 @@ export class TextShapeUtil extends ShapeUtil<TLTextShape> {
     onResize: TLOnResizeHandler<TLTextShape>;
     // (undocumented)
     static props: {
-        color: EnumStyleProp<"black" | "blue" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow">;
+        color: EnumStyleProp<"black" | "blue" | "custom-color" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow">;
         size: EnumStyleProp<"l" | "m" | "s" | "xl">;
         font: EnumStyleProp<"draw" | "mono" | "sans" | "serif">;
         align: EnumStyleProp<"end-legacy" | "end" | "middle-legacy" | "middle" | "start-legacy" | "start">;

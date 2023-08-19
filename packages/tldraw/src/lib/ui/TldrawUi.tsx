@@ -1,7 +1,7 @@
 import { ToastProvider } from '@radix-ui/react-toast'
-import { useEditor, useValue } from '@tldraw/editor'
+import { DefaultColorStyle, DefaultColorThemePalette, useEditor, useValue } from '@tldraw/editor'
 import classNames from 'classnames'
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useState } from 'react'
 import { TldrawUiContextProvider, TldrawUiContextProviderProps } from './TldrawUiContextProvider'
 import { BackToContent } from './components/BackToContent'
 import { DebugPanel } from './components/DebugPanel'
@@ -12,6 +12,7 @@ import { MenuZone } from './components/MenuZone'
 import { NavigationZone } from './components/NavigationZone/NavigationZone'
 import { ExitPenMode } from './components/PenModeToggle'
 import { StopFollowing } from './components/StopFollowing'
+import { ColorPickerPopUp } from './components/StylePanel/ColorPickerPopUp'
 import { StylePanel } from './components/StylePanel/StylePanel'
 import { ToastViewport, Toasts } from './components/Toasts'
 import { Toolbar } from './components/Toolbar/Toolbar'
@@ -111,6 +112,11 @@ const TldrawUiInner = React.memo(function TldrawUiInner({
 	)
 })
 
+/* Temporary for TLDrawUi, will shift to some other file soon */
+const handleColorPickerButtonClick = (e: any) => {
+	// Start the colorpicking thingy from tools/shape
+}
+
 const TldrawUiContent = React.memo(function TldrawUI({
 	shareZone,
 	topZone,
@@ -128,6 +134,29 @@ const TldrawUiContent = React.memo(function TldrawUI({
 	useEditorEvents()
 
 	const { 'toggle-focus-mode': toggleFocus } = useActions()
+
+	// State Management for isPopUpOpen?
+	const [isColorPickerPopUp, setColorPickerPopUp] = useState(false)
+	const handlePopUpChange = () => {
+		setColorPickerPopUp(!isColorPickerPopUp)
+	}
+
+	const setColorValues = (value: string) => {
+		console.log(value) // Change DefaultColorThemePalette
+		DefaultColorThemePalette.darkMode['custom-color'].solid = value
+		DefaultColorThemePalette.darkMode['custom-color'].semi = value
+		DefaultColorThemePalette.darkMode['custom-color'].pattern = value
+		DefaultColorThemePalette.darkMode['custom-color'].highlight.srgb = value
+
+		editor.setStyle(DefaultColorStyle, 'custom-color')
+	}
+
+	const handleHexChoose = (e: any) => {
+		// Change console.log to target the current color or create a function which does the same for you
+		e.key === 'Enter' ? setColorValues(e.currentTarget.value) : null
+	}
+
+	// reference for Custom Button Color to pass onto ColorPickerTool
 
 	return (
 		<ToastProvider>
@@ -160,8 +189,22 @@ const TldrawUiContent = React.memo(function TldrawUI({
 							<div className="tlui-layout__top__right">
 								{shareZone}
 								{breakpoint >= 5 && !isReadonlyMode && (
-									<div className="tlui-style-panel__wrapper">
-										<StylePanel />
+									<div>
+										<div className="tlui-style-panel__wrapper">
+											<StylePanel
+												isColorPickerPopUp={isColorPickerPopUp}
+												handlePopUpChange={handlePopUpChange}
+											/>
+										</div>
+
+										{isColorPickerPopUp ? (
+											<div className="tlui-style-panel__wrapper">
+												<ColorPickerPopUp
+													handleColorPickerButtonClick={handleColorPickerButtonClick}
+													handleHexChoose={handleHexChoose}
+												/>
+											</div>
+										) : null}
 									</div>
 								)}
 							</div>
