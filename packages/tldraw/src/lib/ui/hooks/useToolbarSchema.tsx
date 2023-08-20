@@ -53,7 +53,7 @@ export function ToolbarSchemaProvider({ overrides, children }: TLUiToolbarSchema
 			toolbarItem(tools.text),
 			toolbarItem(tools.note),
 			toolbarItem(tools.asset),
-			toolbarItem(tools.colorpicker),
+			// toolbarItem(tools.colorpicker),		// Make the tool render in styleUi instead of toolbar
 			toolbarItem(tools['rectangle']),
 			toolbarItem(tools['ellipse']),
 			toolbarItem(tools['diamond']),

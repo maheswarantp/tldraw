@@ -246,7 +246,7 @@ const OverflowToolsContent = track(function OverflowToolsContent({
 	)
 })
 
-function ToolbarButton({
+export function ToolbarButton({
 	item,
 	title,
 	isSelected,
@@ -274,7 +274,7 @@ function ToolbarButton({
 	)
 }
 
-const isActiveTLUiToolItem = (
+export const isActiveTLUiToolItem = (
 	item: TLUiToolItem,
 	activeToolId: string | undefined,
 	geoState: string | null | undefined
