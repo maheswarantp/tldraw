@@ -60,17 +60,17 @@ export function ToolsProvider({ overrides, children }: TLUiToolsProviderProps) {
 					trackEvent('select-tool', { source, id: 'select' })
 				},
 			},
-			{
-				id: 'colorpicker',
-				label: 'tool.colorpicker',
-				icon: 'tool-colorpicker',
-				kbd: 'q',
-				readonlyOk: true,
-				onSelect(source) {
-					editor.setCurrentTool('colorpicker')
-					trackEvent('select-tool', { source, id: 'colorpicker' })
-				},
-			},
+			// {
+			// 	id: 'colorpicker',
+			// 	label: 'tool.colorpicker',
+			// 	icon: 'tool-colorpicker',
+			// 	kbd: 'q',
+			// 	readonlyOk: true,
+			// 	onSelect(source) {
+			// 		editor.setCurrentTool('colorpicker')
+			// 		trackEvent('select-tool', { source, id: 'colorpicker' })
+			// 	},
+			// },
 			{
 				id: 'hand',
 				label: 'tool.hand',

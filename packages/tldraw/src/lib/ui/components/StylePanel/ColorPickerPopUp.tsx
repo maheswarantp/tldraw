@@ -1,4 +1,6 @@
 import { GeoShapeGeoStyle, useEditor, useValue } from '@tldraw/editor'
+import { useEffect, useRef, useState } from 'react'
+import { HexColorPicker } from 'react-colorful'
 import { useUiEvents } from '../../hooks/useEventsProvider'
 import { TLUiToolItem } from '../../hooks/useTools'
 import { ToolbarButton, isActiveTLUiToolItem } from '../Toolbar/Toolbar'
@@ -11,6 +13,11 @@ const colorPickerStyles = {
 		alignItems: 'center',
 		width: '100%',
 		height: '10rem',
+	},
+	colorIndex: {
+		width: '100%',
+		height: '100%',
+		padding: '10% 5% 0 5%',
 	},
 	input: {
 		width: '90%',
@@ -30,27 +37,18 @@ const colorPickerStyles = {
 interface ColorPickerProps {
 	handleColorPickerButtonClick: (e: any) => void
 	handleHexChoose: (e: any) => void
+	handleHexColorIndex: (val: string) => void
 }
-
-/*
-export interface TLUiToolItem {
-	id: string
-	label: TLUiTranslationKey
-	shortcutsLabel?: TLUiTranslationKey
-	icon: TLUiIconType
-	onSelect: (source: TLUiEventSource) => void
-	kbd?: string
-	readonlyOk: boolean
-	meta?: {
-		[key: string]: any
-	}
-}
-*/
 
 export const ColorPickerPopUp = ({
 	handleColorPickerButtonClick,
 	handleHexChoose,
+	handleHexColorIndex,
 }: ColorPickerProps) => {
+	const [color, setColor] = useState('#000000')
+
+	const inputRef = useRef<HTMLInputElement | null>(null)
+
 	const editor = useEditor()
 	const activeToolId = useValue('current tool id', () => editor.currentToolId, [editor])
 	const geoState = useValue('geo', () => editor.sharedStyles.getAsKnownValue(GeoShapeGeoStyle), [
@@ -70,20 +68,32 @@ export const ColorPickerPopUp = ({
 		}, // title: 'Color Picker',
 	}
 
+	useEffect(() => {
+		// handleHexColorIndex(color)
+		if (inputRef.current) inputRef.current.value = color
+	}, [color])
+
 	return (
-		<div className="" style={colorPickerStyles.div}>
-			<input
-				type="text"
-				style={colorPickerStyles.input}
-				placeholder={'# HEX VALUE'}
-				onKeyDown={handleHexChoose}
-			/>
-			<ToolbarButton
-				key={toolItem.id}
-				item={toolItem}
-				title={'COlor Picker'}
-				isSelected={isActiveTLUiToolItem(toolItem, activeToolId, geoState)}
-			/>
+		<div className="">
+			<div className="colorIndex" style={colorPickerStyles.div}>
+				<HexColorPicker color={color} style={colorPickerStyles.colorIndex} onChange={setColor} />
+			</div>
+			<div style={colorPickerStyles.div}>
+				<input
+					ref={inputRef}
+					type="text"
+					style={colorPickerStyles.input}
+					placeholder={'# HEX VALUE'}
+					onKeyDown={handleHexChoose}
+				/>
+				<ToolbarButton
+					key={toolItem.id}
+					item={toolItem}
+					title={'Color Picker'}
+					isSelected={isActiveTLUiToolItem(toolItem, activeToolId, geoState)}
+				/>
+			</div>
+
 			{/* <Button icon='tool-colopicker' key={'colorpicker-button'} label={"HI"}/> */}
 			{/* <button style={colorPickerStyles.button} onClick={handleColorPickerButtonClick}>
 				CLR
