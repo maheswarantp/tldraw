@@ -4,6 +4,7 @@ import { HexColorPicker } from 'react-colorful'
 import { useUiEvents } from '../../hooks/useEventsProvider'
 import { TLUiToolItem } from '../../hooks/useTools'
 import { ToolbarButton, isActiveTLUiToolItem } from '../Toolbar/Toolbar'
+import { Button } from '../primitives/Button'
 
 // ColorPickerStyleMap
 const colorPickerStyles = {
@@ -73,8 +74,41 @@ export const ColorPickerPopUp = ({
 		if (inputRef.current) inputRef.current.value = color
 	}, [color])
 
+	// listItems
+	interface ColorPickerButtons {
+		[key: string]: string
+	}
+
+	const [listItems, setListItems] = useState<ColorPickerButtons>({
+		colorpickerButton1: 'Red',
+		colorpickerButton2: 'Blue',
+		colorpickerButton3: 'Yellow',
+		colorpickerButton4: 'Pink',
+		colorpickerButton5: 'Green',
+	})
+
+	const [count, setCount] = useState(1)
+
+	const handleHexChooseBasic = (e: any) => {
+		// Change the list items
+		if (e.key === 'Enter') {
+			const keyToUpdate = Object.keys(listItems).find((obj) => `colorpickerButton${count}` === obj)
+			if (keyToUpdate !== undefined) listItems[keyToUpdate] = e.currentTarget.value
+			count < 5 ? setCount(count + 1) : setCount(1)
+			handleHexChoose(e)
+		}
+	}
+
+	const handleCustomButtonClick = (e: any, key: string) => {
+		e.currentTarget.value = listItems[key]
+		handleHexChoose(e)
+	}
+
 	return (
 		<div className="">
+			<div style={{ display: 'flex' }}>
+				<ButtonOptions listItems={listItems} handleCustomButtonClick={handleCustomButtonClick} />
+			</div>
 			<div className="colorIndex" style={colorPickerStyles.div}>
 				<HexColorPicker color={color} style={colorPickerStyles.colorIndex} onChange={setColor} />
 			</div>
@@ -84,7 +118,7 @@ export const ColorPickerPopUp = ({
 					type="text"
 					style={colorPickerStyles.input}
 					placeholder={'# HEX VALUE'}
-					onKeyDown={handleHexChoose}
+					onKeyDown={handleHexChooseBasic}
 				/>
 				<ToolbarButton
 					key={toolItem.id}
@@ -93,11 +127,30 @@ export const ColorPickerPopUp = ({
 					isSelected={isActiveTLUiToolItem(toolItem, activeToolId, geoState)}
 				/>
 			</div>
-
-			{/* <Button icon='tool-colopicker' key={'colorpicker-button'} label={"HI"}/> */}
-			{/* <button style={colorPickerStyles.button} onClick={handleColorPickerButtonClick}>
-				CLR
-			</button> */}
 		</div>
+	)
+}
+
+const ButtonOptions = ({
+	listItems,
+	handleCustomButtonClick,
+}: {
+	listItems: Object
+	handleCustomButtonClick: (val: any, key: string) => void
+}) => {
+	return (
+		<>
+			{Object.keys(listItems).map((key) => {
+				return (
+					<Button
+						key={key}
+						icon="color"
+						style={{ color: (listItems as any)[key] }}
+						title={(listItems as any)[key]}
+						onClick={(e: any) => handleCustomButtonClick(e, key)}
+					/>
+				)
+			})}
+		</>
 	)
 }

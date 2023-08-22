@@ -153,11 +153,11 @@ const TldrawUiContent = React.memo(function TldrawUI({
 
 	const handleHexChoose = (e: any) => {
 		// Change console.log to target the current color or create a function which does the same for you
-		e.key === 'Enter' ? setColorValues(e.currentTarget.value) : null
+		setColorValues(e.currentTarget.value)
 	}
 
 	const handleHexColorIndex = (val: string) => {
-		console.log(val)
+		// console.log(val)
 	}
 
 	// reference for Custom Button Color to pass onto ColorPickerTool

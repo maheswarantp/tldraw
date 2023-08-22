@@ -10,7 +10,7 @@ import {
 } from '@tldraw/editor'
 import classNames from 'classnames'
 import * as React from 'react'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { TLUiTranslationKey } from '../../hooks/useTranslation/TLUiTranslationKey'
 import { useTranslation } from '../../hooks/useTranslation/useTranslation'
 import { TLUiIconType } from '../../icon-types'
@@ -91,6 +91,7 @@ function _ButtonPicker<T extends string>(props: ButtonPickerProps<T>) {
 
 		const handleCustomColorClick = (e: React.PointerEvent<HTMLButtonElement>) => {
 			// console.log(`Custom Color Button Clicked`);
+			backgroundState === '' ? setBackgroundState('var(--color-hint)') : setBackgroundState('')
 			onPopUpValueChange?.()
 		}
 		return {
@@ -107,6 +108,8 @@ function _ButtonPicker<T extends string>(props: ButtonPickerProps<T>) {
 		() => getDefaultColorTheme({ isDarkMode: editor.user.isDarkMode }),
 		[editor]
 	)
+
+	const [backgroundState, setBackgroundState] = useState('')
 
 	return (
 		<div
@@ -149,9 +152,8 @@ function _ButtonPicker<T extends string>(props: ButtonPickerProps<T>) {
 						style === (DefaultColorStyle as StyleProp<unknown>)
 							? {
 									color: theme['custom-color'].solid,
-									border: '1px solid',
-									borderColor: theme['custom-color'].solid,
 									borderRadius: '10px',
+									background: backgroundState,
 							  }
 							: undefined
 					} // Red button for now, make it different later
