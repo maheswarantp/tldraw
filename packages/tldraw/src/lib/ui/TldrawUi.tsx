@@ -1,7 +1,7 @@
 import { ToastProvider } from '@radix-ui/react-toast'
 import { useEditor, useValue } from '@tldraw/editor'
 import classNames from 'classnames'
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useState } from 'react'
 import { TldrawUiContextProvider, TldrawUiContextProviderProps } from './TldrawUiContextProvider'
 import { BackToContent } from './components/BackToContent'
 import { DebugPanel } from './components/DebugPanel'
@@ -22,6 +22,9 @@ import { useNativeClipboardEvents } from './hooks/useClipboardEvents'
 import { useEditorEvents } from './hooks/useEditorEvents'
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts'
 import { useTranslation } from './hooks/useTranslation/useTranslation'
+
+// ColorPickerPanel
+import { ColorPickerPanel } from './components/StylePanel/ColorPickerPanel'
 
 /**
  * Props for the {@link @tldraw/tldraw#Tldraw} and {@link TldrawUi} components.
@@ -129,6 +132,12 @@ const TldrawUiContent = React.memo(function TldrawUI({
 
 	const { 'toggle-focus-mode': toggleFocus } = useActions()
 
+	// State management for popup
+	const [isPopUp, setPopUp] = useState(false)
+	const handlePopUp = () => {
+		setPopUp(!isPopUp)
+	}
+
 	return (
 		<ToastProvider>
 			<main
@@ -160,8 +169,13 @@ const TldrawUiContent = React.memo(function TldrawUI({
 							<div className="tlui-layout__top__right">
 								{shareZone}
 								{breakpoint >= 5 && !isReadonlyMode && (
-									<div className="tlui-style-panel__wrapper">
-										<StylePanel />
+									<div>
+										<div className="tlui-style-panel__wrapper">
+											<StylePanel handlePopUp={handlePopUp} />
+										</div>
+										<div className="tlui-style-panel__wrapper">
+											{isPopUp ? <ColorPickerPanel /> : null}
+										</div>
 									</div>
 								)}
 							</div>

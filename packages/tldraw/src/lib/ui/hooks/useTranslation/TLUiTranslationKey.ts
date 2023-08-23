@@ -183,6 +183,7 @@ export type TLUiTranslationKey =
 	| 'tool.arrow-left'
 	| 'tool.arrow-right'
 	| 'tool.arrow-up'
+	| 'tool.colorpicker'
 	| 'tool.arrow'
 	| 'tool.cloud'
 	| 'tool.diamond'

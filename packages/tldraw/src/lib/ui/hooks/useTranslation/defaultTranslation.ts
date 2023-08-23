@@ -183,6 +183,7 @@ export const DEFAULT_TRANSLATION = {
 	'tool.arrow-left': 'Arrow left',
 	'tool.arrow-right': 'Arrow right',
 	'tool.arrow-up': 'Arrow up',
+	'tool.colorpicker': 'Eye Dropper',
 	'tool.arrow': 'Arrow',
 	'tool.cloud': 'Cloud',
 	'tool.diamond': 'Diamond',

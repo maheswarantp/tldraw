@@ -30,6 +30,7 @@ import { STYLES } from './styles'
 
 interface StylePanelProps {
 	isMobile?: boolean
+	handlePopUp?: () => void
 }
 
 const selectToolStyles = [DefaultColorStyle, DefaultDashStyle, DefaultFillStyle, DefaultSizeStyle]
@@ -50,7 +51,7 @@ function getRelevantStyles(
 }
 
 /** @internal */
-export const StylePanel = function StylePanel({ isMobile }: StylePanelProps) {
+export const StylePanel = function StylePanel({ isMobile, handlePopUp }: StylePanelProps) {
 	const editor = useEditor()
 
 	const relevantStyles = useValue('getRelevantStyles', () => getRelevantStyles(editor), [editor])
@@ -77,7 +78,7 @@ export const StylePanel = function StylePanel({ isMobile }: StylePanelProps) {
 
 	return (
 		<div className="tlui-style-panel" data-ismobile={isMobile} onPointerLeave={handlePointerOut}>
-			<CommonStylePickerSet styles={styles} opacity={opacity} />
+			<CommonStylePickerSet styles={styles} opacity={opacity} handlePopUp={handlePopUp} />
 			{!hideText && <TextStylePickerSet styles={styles} />}
 			{!(hideGeo && hideArrowHeads && hideSpline) && (
 				<div className="tlui-style-panel__section" aria-label="style panel styles">
@@ -106,9 +107,11 @@ const tldrawSupportedOpacities = [0.1, 0.25, 0.5, 0.75, 1] as const
 function CommonStylePickerSet({
 	styles,
 	opacity,
+	handlePopUp,
 }: {
 	styles: ReadonlySharedStyleMap
 	opacity: SharedStyle<number>
+	handlePopUp?: () => void | undefined
 }) {
 	const editor = useEditor()
 	const msg = useTranslation()
@@ -155,6 +158,7 @@ function CommonStylePickerSet({
 						items={STYLES.color}
 						value={color}
 						onValueChange={handleValueChange}
+						handlePopUp={handlePopUp}
 					/>
 				)}
 				{opacity === undefined ? null : (

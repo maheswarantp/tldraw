@@ -161,6 +161,7 @@ import iconsTextAlignJustify from './icons/icon/text-align-justify.svg'
 import iconsTextAlignLeft from './icons/icon/text-align-left.svg'
 import iconsTextAlignRight from './icons/icon/text-align-right.svg'
 import iconsToolArrow from './icons/icon/tool-arrow.svg'
+import iconsToolColorpicker from './icons/icon/tool-colorpicker.svg'
 import iconsToolEmbed from './icons/icon/tool-embed.svg'
 import iconsToolEraser from './icons/icon/tool-eraser.svg'
 import iconsToolFrame from './icons/icon/tool-frame.svg'
@@ -372,6 +373,7 @@ export function getAssetUrlsByImport(opts) {
 			'text-align-left': formatAssetUrl(iconsTextAlignLeft, opts),
 			'text-align-right': formatAssetUrl(iconsTextAlignRight, opts),
 			'tool-arrow': formatAssetUrl(iconsToolArrow, opts),
+			'tool-colorpicker': formatAssetUrl(iconsToolColorpicker, opts),
 			'tool-embed': formatAssetUrl(iconsToolEmbed, opts),
 			'tool-eraser': formatAssetUrl(iconsToolEraser, opts),
 			'tool-frame': formatAssetUrl(iconsToolFrame, opts),

@@ -17,6 +17,7 @@ export const STYLES = {
 		{ value: 'light-green', icon: 'color' },
 		{ value: 'light-red', icon: 'color' },
 		{ value: 'red', icon: 'color' },
+		{ value: 'custom-color', icon: 'color' },
 	],
 	fill: [
 		{ value: 'none', icon: 'fill-none' },

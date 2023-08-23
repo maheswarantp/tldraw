@@ -15,6 +15,7 @@ const colors = [
 	'light-green',
 	'light-red',
 	'red',
+	'custom-color',
 ] as const
 
 /** @public */
@@ -48,6 +49,19 @@ export const DefaultColorThemePalette: {
 		text: '#000000',
 		background: 'rgb(249, 250, 251)',
 		solid: '#fcfffe',
+
+		// Custom Color
+		'custom-color': {
+			solid: '#1d1d1d',
+			semi: '#e8e8e8',
+			pattern: '#494949',
+			highlight: {
+				srgb: '#fddd00',
+				p3: 'color(display-p3 0.972 0.8705 0.05)',
+			},
+		},
+
+		// Other regular colors
 
 		black: {
 			solid: '#1d1d1d',
@@ -163,6 +177,19 @@ export const DefaultColorThemePalette: {
 		text: '#f8f9fa',
 		background: '#212529',
 		solid: '#28292e',
+
+		// Custom Color
+		'custom-color': {
+			solid: '#1d1d1d',
+			semi: '#e8e8e8',
+			pattern: '#494949',
+			highlight: {
+				srgb: '#fddd00',
+				p3: 'color(display-p3 0.972 0.8705 0.05)',
+			},
+		},
+
+		// Other Regular Colors
 
 		black: {
 			solid: '#e1e1e1',

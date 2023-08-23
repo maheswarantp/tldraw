@@ -138,6 +138,7 @@ export type TLUiIconType =
 	| 'text-align-left'
 	| 'text-align-right'
 	| 'tool-arrow'
+	| 'tool-colorpicker'
 	| 'tool-embed'
 	| 'tool-eraser'
 	| 'tool-frame'
@@ -303,6 +304,7 @@ export const iconTypes = [
 	'text-align-left',
 	'text-align-right',
 	'tool-arrow',
+	'tool-colorpicker',
 	'tool-embed',
 	'tool-eraser',
 	'tool-frame',
