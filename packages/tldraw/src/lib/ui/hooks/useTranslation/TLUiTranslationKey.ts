@@ -101,6 +101,7 @@ export type TLUiTranslationKey =
 	| 'action.zoom-to-selection'
 	| 'color-style.black'
 	| 'color-style.blue'
+	| 'color-style.custom-color'
 	| 'color-style.green'
 	| 'color-style.grey'
 	| 'color-style.light-blue'

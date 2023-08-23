@@ -101,6 +101,7 @@ export const DEFAULT_TRANSLATION = {
 	'action.zoom-to-selection': 'Zoom to selection',
 	'color-style.black': 'Black',
 	'color-style.blue': 'Blue',
+	'color-style.custom-color': 'Custom Color',
 	'color-style.green': 'Green',
 	'color-style.grey': 'Grey',
 	'color-style.light-blue': 'Light blue',
