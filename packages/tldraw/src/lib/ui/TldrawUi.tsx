@@ -1,5 +1,11 @@
 import { ToastProvider } from '@radix-ui/react-toast'
-import { useEditor, useValue } from '@tldraw/editor'
+import {
+	DefaultColorStyle,
+	DefaultColorThemePalette,
+	Editor,
+	useEditor,
+	useValue,
+} from '@tldraw/editor'
 import classNames from 'classnames'
 import React, { ReactNode, useState } from 'react'
 import { TldrawUiContextProvider, TldrawUiContextProviderProps } from './TldrawUiContextProvider'
@@ -138,6 +144,26 @@ const TldrawUiContent = React.memo(function TldrawUI({
 		setPopUp(!isPopUp)
 	}
 
+	// handle Custom color Button Change on StylePanel
+	const [color, setColor] = useState('#ff00aa')
+
+	const handleCustomColorValueChange = (val: string) => {
+		setColor('#' + val)
+		setCustomColors(editor, color)
+	}
+	const setCustomColors = (editor: Editor, value: string) => {
+		DefaultColorThemePalette.darkMode['custom-color'].solid = value
+		DefaultColorThemePalette.darkMode['custom-color'].semi = value
+		DefaultColorThemePalette.darkMode['custom-color'].pattern = value
+		DefaultColorThemePalette.darkMode['custom-color'].highlight.srgb = value
+
+		DefaultColorThemePalette.lightMode['custom-color'].solid = value
+		DefaultColorThemePalette.lightMode['custom-color'].semi = value
+		DefaultColorThemePalette.lightMode['custom-color'].pattern = value
+		DefaultColorThemePalette.lightMode['custom-color'].highlight.srgb = value
+
+		editor.setStyle(DefaultColorStyle, 'custom-color')
+	}
 	return (
 		<ToastProvider>
 			<main
@@ -174,7 +200,11 @@ const TldrawUiContent = React.memo(function TldrawUI({
 											<StylePanel handlePopUp={handlePopUp} />
 										</div>
 										<div className="tlui-style-panel__wrapper">
-											{isPopUp ? <ColorPickerPanel /> : null}
+											{isPopUp ? (
+												<ColorPickerPanel
+													handleCustomColorValueChange={handleCustomColorValueChange}
+												/>
+											) : null}
 										</div>
 									</div>
 								)}

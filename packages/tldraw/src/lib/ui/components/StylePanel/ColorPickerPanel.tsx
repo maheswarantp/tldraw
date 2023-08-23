@@ -1,4 +1,3 @@
-import { DefaultColorStyle, DefaultColorThemePalette, Editor, useEditor } from '@tldraw/editor'
 import React, { useEffect, useState } from 'react'
 import { HexColorInput, HexColorPicker } from 'react-colorful'
 import { Button } from '../primitives/Button'
@@ -9,8 +8,11 @@ export interface ColorPickerButtons {
 	[key: string]: string
 }
 
-export const ColorPickerPanel = () => {
-	const editor = useEditor()
+export const ColorPickerPanel = ({
+	handleCustomColorValueChange,
+}: {
+	handleCustomColorValueChange: (val: string) => void
+}) => {
 	const [color, setColor] = useState('#ff00aa')
 
 	const [listItems, setListItems] = useState<ColorPickerButtons>({
@@ -25,14 +27,10 @@ export const ColorPickerPanel = () => {
 	}
 
 	const setCustomHexValue = (e: any) => {
-		console.log(e.currentTarget.value)
-		setCustomColors(editor, '#' + e.currentTarget.value)
+		handleCustomColorValueChange(e.currentTarget.value)
 	}
 
-	useEffect(() => {
-		// console.log(color)
-		setCustomColors(editor, color)
-	}, [color])
+	useEffect(() => {}, [color])
 
 	return (
 		<div className="tlui-style-panel tlui-color-panel">
@@ -80,18 +78,4 @@ const ButtonOptions = ({
 			})}
 		</>
 	)
-}
-
-const setCustomColors = (editor: Editor, value: string) => {
-	DefaultColorThemePalette.darkMode['custom-color'].solid = value
-	DefaultColorThemePalette.darkMode['custom-color'].semi = value
-	DefaultColorThemePalette.darkMode['custom-color'].pattern = value
-	DefaultColorThemePalette.darkMode['custom-color'].highlight.srgb = value
-
-	DefaultColorThemePalette.lightMode['custom-color'].solid = value
-	DefaultColorThemePalette.lightMode['custom-color'].semi = value
-	DefaultColorThemePalette.lightMode['custom-color'].pattern = value
-	DefaultColorThemePalette.lightMode['custom-color'].highlight.srgb = value
-
-	editor.setStyle(DefaultColorStyle, 'custom-color')
 }
