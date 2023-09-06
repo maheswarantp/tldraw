@@ -272,7 +272,7 @@ export const defaultShapeTools: (typeof ArrowShapeTool | typeof DrawShapeTool | 
 export const defaultShapeUtils: TLAnyShapeUtilConstructor[];
 
 // @public (undocumented)
-export const defaultTools: (typeof EraserTool | typeof HandTool | typeof LaserTool | typeof SelectTool | typeof ZoomTool)[];
+export const defaultTools: (typeof ColorPickerTool | typeof EraserTool | typeof HandTool | typeof LaserTool | typeof SelectTool | typeof ZoomTool)[];
 
 declare namespace Dialog {
     export {

@@ -187,6 +187,7 @@ export const DEFAULT_TRANSLATION = {
 	'tool.colorpicker': 'Eye Dropper',
 	'tool.arrow': 'Arrow',
 	'tool.cloud': 'Cloud',
+	'tool.colorpicker': 'Color Picker',
 	'tool.diamond': 'Diamond',
 	'tool.ellipse': 'Ellipse',
 	'tool.hexagon': 'Hexagon',

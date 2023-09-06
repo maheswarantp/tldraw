@@ -187,6 +187,7 @@ export type TLUiTranslationKey =
 	| 'tool.colorpicker'
 	| 'tool.arrow'
 	| 'tool.cloud'
+	| 'tool.colorpicker'
 	| 'tool.diamond'
 	| 'tool.ellipse'
 	| 'tool.hexagon'
