@@ -1,6 +1,8 @@
+import { useEditor, useValue } from '@tldraw/editor'
 import React, { useEffect, useState } from 'react'
 import { HexColorInput, HexColorPicker } from 'react-colorful'
 import { Button } from '../primitives/Button'
+import { getRelevantStyles } from './StylePanel'
 import './colorpicker.css'
 
 // interface for color picker buttons
@@ -31,6 +33,12 @@ export const ColorPickerPanel = ({
 	}
 
 	useEffect(() => {}, [color])
+
+	// Disable like stylepanel and enable
+	const editor = useEditor()
+	const relevantStyles = useValue('getRelevantStyles', () => getRelevantStyles(editor), [editor])
+
+	if (!relevantStyles) return null
 
 	return (
 		<div className="tlui-style-panel tlui-color-panel">

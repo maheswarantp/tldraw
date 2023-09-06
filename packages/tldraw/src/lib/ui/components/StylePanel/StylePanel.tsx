@@ -34,10 +34,17 @@ interface StylePanelProps {
 }
 
 const selectToolStyles = [DefaultColorStyle, DefaultDashStyle, DefaultFillStyle, DefaultSizeStyle]
-function getRelevantStyles(
+export function getRelevantStyles(
 	editor: Editor
 ): { styles: ReadonlySharedStyleMap; opacity: SharedStyle<number> } | null {
 	const styles = new SharedStyleMap(editor.sharedStyles)
+
+	// if(styles.size === 0)
+	// {
+	// 	const currentTool = editor.root.current.value
+	// 	console.log(currentTool);			// if id === colorpicker, dont disable stylepanel
+	// }
+
 	const hasShape = editor.selectedShapeIds.length > 0 || !!editor.root.current.value?.shapeType
 
 	if (styles.size === 0 && editor.isIn('select') && editor.selectedShapeIds.length === 0) {
@@ -62,7 +69,7 @@ export const StylePanel = function StylePanel({ isMobile, handlePopUp }: StylePa
 		}
 	}, [editor, isMobile])
 
-	if (!relevantStyles) return null
+	if (!relevantStyles) return null // What elimiates the style panel
 
 	const { styles, opacity } = relevantStyles
 	const geo = styles.get(GeoShapeGeoStyle)
