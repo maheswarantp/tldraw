@@ -1,0 +1,40 @@
+.tlui-color-panel {
+
+}
+
+.tlui-color-panel .tlui-colorpickerpopup__custom-buttons {
+    display: flex;
+}
+
+.tlui-color-panel .tlui-colorpickerpopup__colorindex, .tlui-colorpickerpopup__hexcolorinput {
+    display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 10rem;
+}
+
+.tlui-colorpickerpopup__colorindex .react-colorful__hexcolorpicker {
+    width: 100%;
+    height: 100%;
+    padding: 5%;
+}
+
+.tlui-colorpickerpopup__hexcolorinput .tlui-colorpickerpopup__inputfield {
+    width: 90%;
+    border-radius: 10px;
+    height: 3rem;
+    margin-left: 5%;
+    align-self: center;
+}
+
+.tlui-colorpickerpopup__colorindex .react-colorful__hue-pointer {
+    width: 16px;
+    border-radius: 3px;
+}
+
+.tlui-colorpickerpopup__colorindex .react-colorful__saturation-pointer {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+}

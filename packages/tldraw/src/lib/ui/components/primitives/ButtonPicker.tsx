@@ -26,6 +26,7 @@ export interface ButtonPickerProps<T extends string> {
 	items: StyleValuesForUi<T>
 	columns?: 2 | 3 | 4
 	onValueChange: (style: StyleProp<T>, value: T, squashing: boolean) => void
+	handlePopUp?: () => void
 }
 
 function _ButtonPicker<T extends string>(props: ButtonPickerProps<T>) {
@@ -37,6 +38,7 @@ function _ButtonPicker<T extends string>(props: ButtonPickerProps<T>) {
 		value,
 		columns = clamp(items.length, 2, 4),
 		onValueChange,
+		handlePopUp,
 	} = props
 	const editor = useEditor()
 	const msg = useTranslation()
@@ -48,6 +50,8 @@ function _ButtonPicker<T extends string>(props: ButtonPickerProps<T>) {
 		handleButtonPointerDown,
 		handleButtonPointerEnter,
 		handleButtonPointerUp,
+		handleCustomColorButtonPointerDown,
+		handleCustomColorButtonPointerUp,
 	} = React.useMemo(() => {
 		const handlePointerUp = () => {
 			rPointing.current = false
@@ -84,11 +88,33 @@ function _ButtonPicker<T extends string>(props: ButtonPickerProps<T>) {
 			onValueChange(style, id as T, false)
 		}
 
+		// Create custom handlers for custom color button
+		const handleCustomColorButtonPointerDown = (e: React.PointerEvent<HTMLButtonElement>) => {
+			// Handle the custom color button pointer down
+			const { id } = e.currentTarget.dataset
+
+			editor.mark('point picker item')
+			onValueChange(style, id as T, true)
+
+			handlePopUp?.() // Handle popup
+
+			rPointing.current = true
+			window.addEventListener('pointerup', handlePointerUp) // see TLD-658
+		}
+
+		const handleCustomColorButtonPointerUp = (e: React.PointerEvent<HTMLButtonElement>) => {
+			// Handle custom color button pointer up
+			const { id } = e.currentTarget.dataset
+			onValueChange(style, id as T, false)
+		}
+
 		return {
 			handleButtonClick,
 			handleButtonPointerDown,
 			handleButtonPointerEnter,
 			handleButtonPointerUp,
+			handleCustomColorButtonPointerDown,
+			handleCustomColorButtonPointerUp,
 		}
 	}, [value, editor, onValueChange, style])
 
@@ -98,6 +124,32 @@ function _ButtonPicker<T extends string>(props: ButtonPickerProps<T>) {
 		[editor]
 	)
 
+	// Custom Color Button
+	const CustomColorButton = (props: CustomButtonProps) => {
+		const { item } = props
+		return (
+			<Button
+				key={`custom-color:${item.value}`}
+				data-id={item.value}
+				data-testid={`style.${uiType}.${item.value}`}
+				aria-label={item.value}
+				data-state={value.type === 'shared' && value.value === item.value ? 'hinted' : undefined}
+				title={title + ' — ' + msg(`${uiType}-style.${item.value}` as TLUiTranslationKey)}
+				className={classNames('tlui-button-grid__button')}
+				style={
+					style === (DefaultColorStyle as StyleProp<unknown>)
+						? { color: theme['custom-color'].solid }
+						: undefined
+				}
+				onPointerEnter={handleButtonPointerEnter}
+				onPointerDown={handleCustomColorButtonPointerDown}
+				onPointerUp={handleCustomColorButtonPointerUp}
+				onClick={handleButtonClick}
+				icon={item.icon as TLUiIconType}
+			/>
+		)
+	}
+
 	return (
 		<div
 			className={classNames('tlui-button-grid', {
@@ -106,29 +158,39 @@ function _ButtonPicker<T extends string>(props: ButtonPickerProps<T>) {
 				'tlui-button-grid__four': columns === 4,
 			})}
 		>
-			{items.map((item) => (
-				<Button
-					key={item.value}
-					data-id={item.value}
-					data-testid={`style.${uiType}.${item.value}`}
-					aria-label={item.value}
-					data-state={value.type === 'shared' && value.value === item.value ? 'hinted' : undefined}
-					title={title + ' — ' + msg(`${uiType}-style.${item.value}` as TLUiTranslationKey)}
-					className={classNames('tlui-button-grid__button')}
-					style={
-						style === (DefaultColorStyle as StyleProp<unknown>)
-							? { color: theme[item.value as TLDefaultColorStyle].solid }
-							: undefined
-					}
-					onPointerEnter={handleButtonPointerEnter}
-					onPointerDown={handleButtonPointerDown}
-					onPointerUp={handleButtonPointerUp}
-					onClick={handleButtonClick}
-					icon={item.icon as TLUiIconType}
-				/>
-			))}
+			{items.map((item) =>
+				item.value === 'custom-color' ? (
+					<CustomColorButton item={item} key="custom-color-button" />
+				) : (
+					<Button
+						key={item.value}
+						data-id={item.value}
+						data-testid={`style.${uiType}.${item.value}`}
+						aria-label={item.value}
+						data-state={
+							value.type === 'shared' && value.value === item.value ? 'hinted' : undefined
+						}
+						title={title + ' — ' + msg(`${uiType}-style.${item.value}` as TLUiTranslationKey)}
+						className={classNames('tlui-button-grid__button')}
+						style={
+							style === (DefaultColorStyle as StyleProp<unknown>)
+								? { color: theme[item.value as TLDefaultColorStyle].solid }
+								: undefined
+						}
+						onPointerEnter={handleButtonPointerEnter}
+						onPointerDown={handleButtonPointerDown}
+						onPointerUp={handleButtonPointerUp}
+						onClick={handleButtonClick}
+						icon={item.icon as TLUiIconType}
+					/>
+				)
+			)}
 		</div>
 	)
+}
+
+export interface CustomButtonProps {
+	item: any
 }
 
 /** @internal */
